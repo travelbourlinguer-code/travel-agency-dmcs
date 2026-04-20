@@ -1,0 +1,1191 @@
+## TravelPackage
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `package_name` | string | Yes | Nombre del paquete de viaje |
+| `first_name` | string | Yes | Nombre del pasajero |
+| `last_name_1` | string | Yes | Primer apellido |
+| `last_name_2` | string |  | Segundo apellido |
+| `birth_date` | string |  | Fecha de nacimiento |
+| `age` | number |  | Edad del pasajero |
+| `phone` | string |  | Teléfono |
+| `email` | string |  | Correo electrónico |
+| `has_passport` | boolean |  | ¿Tiene pasaporte? |
+| `has_visa` | boolean |  | ¿Tiene visa? |
+| `has_eta` | boolean |  | ¿Tiene ETA? |
+| `package_amount_usd` | number | Yes | Monto total del paquete en USD |
+| `exchange_rate` | number | Yes | Tipo de cambio USD a MXN |
+| `markup_agency_usd` | number |  | Markup agencia en USD |
+| `markup_external_usd` | number |  | Markup externo en USD |
+| `package_total_mxn` | number |  | Total del paquete en MXN (calculado automáticamente) |
+| `insurance_amount` | number |  | Monto del seguro |
+| `chip_amount` | number |  | Monto del chip |
+| `other_amount` | number |  | Monto de otros conceptos |
+| `status` | `activo`, `liquidado`, `cancelado` |  | Estado del paquete |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/TravelPackage`
+List TravelPackage records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.TravelPackage.list();
+```
+
+### `POST /entities/TravelPackage`
+Create a TravelPackage record
+
+```javascript
+const record = await base44.entities.TravelPackage.create({
+  // your data
+});
+```
+
+### `DELETE /entities/TravelPackage`
+Delete multiple TravelPackage records
+
+```javascript
+await base44.entities.TravelPackage.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  package_name: "Example package_name"
+});
+```
+
+### `POST /entities/TravelPackage/bulk`
+Bulk create TravelPackage records
+
+```javascript
+const records = await base44.entities.TravelPackage.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/TravelPackage/bulk`
+Bulk update TravelPackage records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/TravelPackage/update-many`
+Update many TravelPackage records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/TravelPackage/{TravelPackage_id}`
+Get a TravelPackage record by ID
+
+**Parameters:**
+- `TravelPackage_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.TravelPackage.get(recordId);
+```
+
+### `PUT /entities/TravelPackage/{TravelPackage_id}`
+Update a TravelPackage record
+
+**Parameters:**
+- `TravelPackage_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.TravelPackage.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/TravelPackage/{TravelPackage_id}`
+Delete a TravelPackage record
+
+**Parameters:**
+- `TravelPackage_id` (path): Record ID
+
+```javascript
+await base44.entities.TravelPackage.delete(recordId);
+```
+
+### `PUT /entities/TravelPackage/{TravelPackage_id}/restore`
+Restore a deleted TravelPackage record
+
+**Parameters:**
+- `TravelPackage_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.TravelPackage.restore(recordId);
+```
+
+## Payment
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `travel_package_id` | string | Yes | ID del paquete de viaje |
+| `payment_number` | number |  | Número de mensualidad (1-14) |
+| `mensualidad` | string |  | Mensualidad específica capturada (ej: Mensualidad 1 de 13) |
+| `amount` | number | Yes | Monto del pago en MXN |
+| `amount_usd` | number |  | Monto del pago convertido a USD |
+| `exchange_rate_day` | number |  | Tipo de cambio del día del pago |
+| `payment_date` | string |  | Fecha de pago |
+| `concept` | `paquete`, `seguro`, `chip`, `otro` | Yes | Concepto del pago |
+| `notes` | string |  | Notas del pago |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Payment`
+List Payment records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Payment.list();
+```
+
+### `POST /entities/Payment`
+Create a Payment record
+
+```javascript
+const record = await base44.entities.Payment.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Payment`
+Delete multiple Payment records
+
+```javascript
+await base44.entities.Payment.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  travel_package_id: "Example travel_package_id"
+});
+```
+
+### `POST /entities/Payment/bulk`
+Bulk create Payment records
+
+```javascript
+const records = await base44.entities.Payment.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Payment/bulk`
+Bulk update Payment records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Payment/update-many`
+Update many Payment records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Payment/{Payment_id}`
+Get a Payment record by ID
+
+**Parameters:**
+- `Payment_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Payment.get(recordId);
+```
+
+### `PUT /entities/Payment/{Payment_id}`
+Update a Payment record
+
+**Parameters:**
+- `Payment_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Payment.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Payment/{Payment_id}`
+Delete a Payment record
+
+**Parameters:**
+- `Payment_id` (path): Record ID
+
+```javascript
+await base44.entities.Payment.delete(recordId);
+```
+
+### `PUT /entities/Payment/{Payment_id}/restore`
+Restore a deleted Payment record
+
+**Parameters:**
+- `Payment_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Payment.restore(recordId);
+```
+
+## Refund
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `travel_package_id` | string | Yes | ID del paquete de viaje |
+| `refund_type` | `cliente`, `proveedor` | Yes | Tipo de devolución |
+| `concept` | `paquete`, `seguro`, `chip`, `otro` | Yes | Rubro afectado |
+| `amount` | number | Yes | Monto de la devolución |
+| `admin_fee` | number |  | Cargo administrativo (10% para devolución a cliente) |
+| `net_refund` | number |  | Devolución neta (después del cargo administrativo) |
+| `refund_date` | string |  | Fecha de devolución |
+| `notes` | string |  | Notas |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Refund`
+List Refund records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Refund.list();
+```
+
+### `POST /entities/Refund`
+Create a Refund record
+
+```javascript
+const record = await base44.entities.Refund.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Refund`
+Delete multiple Refund records
+
+```javascript
+await base44.entities.Refund.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  travel_package_id: "Example travel_package_id"
+});
+```
+
+### `POST /entities/Refund/bulk`
+Bulk create Refund records
+
+```javascript
+const records = await base44.entities.Refund.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Refund/bulk`
+Bulk update Refund records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Refund/update-many`
+Update many Refund records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Refund/{Refund_id}`
+Get a Refund record by ID
+
+**Parameters:**
+- `Refund_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Refund.get(recordId);
+```
+
+### `PUT /entities/Refund/{Refund_id}`
+Update a Refund record
+
+**Parameters:**
+- `Refund_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Refund.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Refund/{Refund_id}`
+Delete a Refund record
+
+**Parameters:**
+- `Refund_id` (path): Record ID
+
+```javascript
+await base44.entities.Refund.delete(recordId);
+```
+
+### `PUT /entities/Refund/{Refund_id}/restore`
+Restore a deleted Refund record
+
+**Parameters:**
+- `Refund_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Refund.restore(recordId);
+```
+
+## Transfer
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `travel_package_id` | string | Yes | ID del paquete de viaje |
+| `amount` | number | Yes | Monto del traspaso |
+| `description` | string |  | Descripción del traspaso |
+| `transfer_date` | string |  | Fecha del traspaso |
+| `notes` | string |  | Notas |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Transfer`
+List Transfer records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Transfer.list();
+```
+
+### `POST /entities/Transfer`
+Create a Transfer record
+
+```javascript
+const record = await base44.entities.Transfer.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Transfer`
+Delete multiple Transfer records
+
+```javascript
+await base44.entities.Transfer.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  travel_package_id: "Example travel_package_id"
+});
+```
+
+### `POST /entities/Transfer/bulk`
+Bulk create Transfer records
+
+```javascript
+const records = await base44.entities.Transfer.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Transfer/bulk`
+Bulk update Transfer records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Transfer/update-many`
+Update many Transfer records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Transfer/{Transfer_id}`
+Get a Transfer record by ID
+
+**Parameters:**
+- `Transfer_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Transfer.get(recordId);
+```
+
+### `PUT /entities/Transfer/{Transfer_id}`
+Update a Transfer record
+
+**Parameters:**
+- `Transfer_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Transfer.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Transfer/{Transfer_id}`
+Delete a Transfer record
+
+**Parameters:**
+- `Transfer_id` (path): Record ID
+
+```javascript
+await base44.entities.Transfer.delete(recordId);
+```
+
+### `PUT /entities/Transfer/{Transfer_id}/restore`
+Restore a deleted Transfer record
+
+**Parameters:**
+- `Transfer_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Transfer.restore(recordId);
+```
+
+## LeisureExpediente
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `expediente_num` | string | Yes | Número de expediente Leisure (texto/número) |
+| `package_name` | string | Yes | Nombre del paquete de viaje |
+| `package_amount_usd` | number | Yes | Valor total del expediente en USD |
+| `exchange_rate` | number | Yes | Tipo de cambio USD a MXN |
+| `markup_agency_usd` | number |  | Comisión agencia en USD |
+| `tour_adicional_usd` | number |  | Costo del tour adicional por pasajero en USD |
+| `tour_adicional_passengers` | number |  | Número de pasajeros que compraron tour adicional |
+| `tour_adicional_total` | number |  | Total tour adicional (precio × pasajeros) |
+| `tour_adicional_2_usd` | number |  | Tour adicional 2 por pasajero en USD |
+| `tour_adicional_2_passengers` | number |  | Pasajeros tour adicional 2 |
+| `tour_adicional_2_total` | number |  | Total tour adicional 2 |
+| `tour_adicional_3_usd` | number |  | Tour adicional 3 por pasajero en USD |
+| `tour_adicional_3_passengers` | number |  | Pasajeros tour adicional 3 |
+| `tour_adicional_3_total` | number |  | Total tour adicional 3 |
+| `tour_adicional_4_usd` | number |  | Tour adicional 4 por pasajero en USD |
+| `tour_adicional_4_passengers` | number |  | Pasajeros tour adicional 4 |
+| `tour_adicional_4_total` | number |  | Total tour adicional 4 |
+| `otro_usd` | number |  | Otro concepto por pasajero en USD |
+| `otro_passengers` | number |  | Pasajeros otro concepto |
+| `otro_total` | number |  | Total otro concepto |
+| `status` | `activo`, `liquidado`, `cancelado` |  | Estado del expediente |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/LeisureExpediente`
+List LeisureExpediente records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.LeisureExpediente.list();
+```
+
+### `POST /entities/LeisureExpediente`
+Create a LeisureExpediente record
+
+```javascript
+const record = await base44.entities.LeisureExpediente.create({
+  // your data
+});
+```
+
+### `DELETE /entities/LeisureExpediente`
+Delete multiple LeisureExpediente records
+
+```javascript
+await base44.entities.LeisureExpediente.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  expediente_num: "Example expediente_num"
+});
+```
+
+### `POST /entities/LeisureExpediente/bulk`
+Bulk create LeisureExpediente records
+
+```javascript
+const records = await base44.entities.LeisureExpediente.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/LeisureExpediente/bulk`
+Bulk update LeisureExpediente records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/LeisureExpediente/update-many`
+Update many LeisureExpediente records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/LeisureExpediente/{LeisureExpediente_id}`
+Get a LeisureExpediente record by ID
+
+**Parameters:**
+- `LeisureExpediente_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.LeisureExpediente.get(recordId);
+```
+
+### `PUT /entities/LeisureExpediente/{LeisureExpediente_id}`
+Update a LeisureExpediente record
+
+**Parameters:**
+- `LeisureExpediente_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.LeisureExpediente.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/LeisureExpediente/{LeisureExpediente_id}`
+Delete a LeisureExpediente record
+
+**Parameters:**
+- `LeisureExpediente_id` (path): Record ID
+
+```javascript
+await base44.entities.LeisureExpediente.delete(recordId);
+```
+
+### `PUT /entities/LeisureExpediente/{LeisureExpediente_id}/restore`
+Restore a deleted LeisureExpediente record
+
+**Parameters:**
+- `LeisureExpediente_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.LeisureExpediente.restore(recordId);
+```
+
+## Passenger
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `expediente_id` | string |  | ID del expediente Leisure al que pertenece |
+| `expediente_num` | string |  | Número de expediente (referencia visual) |
+| `package_name` | string | Yes | Nombre del paquete de viaje |
+| `travel_package_id` | string |  | ID del TravelPackage vinculado (para acceder a su hoja de pagos) |
+| `first_name` | string | Yes | Nombre(s) del pasajero |
+| `last_name_1` | string | Yes | Primer apellido |
+| `last_name_2` | string |  | Segundo apellido |
+| `birth_date` | string |  | Fecha de nacimiento |
+| `age` | number |  | Edad |
+| `phone` | string |  | Teléfono |
+| `email` | string |  | Correo electrónico |
+| `has_passport` | boolean |  | ¿Tiene pasaporte? |
+| `has_visa` | boolean |  | ¿Tiene visa? |
+| `has_eta` | boolean |  | ¿Tiene ETA? |
+| `package_amount_usd` | number | Yes | Monto del paquete por pasajero en USD |
+| `exchange_rate` | number | Yes | Tipo de cambio |
+| `markup_agency_usd` | number |  | Markup agencia en USD |
+| `markup_external_usd` | number |  | Markup externo en USD |
+| `insurance_amount` | number |  | Monto seguro |
+| `chip_amount` | number |  | Monto chip |
+| `other_amount` | number |  | Monto otros |
+| `status` | `activo`, `liquidado`, `cancelado` |  | Estado |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Passenger`
+List Passenger records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Passenger.list();
+```
+
+### `POST /entities/Passenger`
+Create a Passenger record
+
+```javascript
+const record = await base44.entities.Passenger.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Passenger`
+Delete multiple Passenger records
+
+```javascript
+await base44.entities.Passenger.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  package_name: "Example package_name"
+});
+```
+
+### `POST /entities/Passenger/bulk`
+Bulk create Passenger records
+
+```javascript
+const records = await base44.entities.Passenger.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Passenger/bulk`
+Bulk update Passenger records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Passenger/update-many`
+Update many Passenger records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Passenger/{Passenger_id}`
+Get a Passenger record by ID
+
+**Parameters:**
+- `Passenger_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Passenger.get(recordId);
+```
+
+### `PUT /entities/Passenger/{Passenger_id}`
+Update a Passenger record
+
+**Parameters:**
+- `Passenger_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Passenger.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Passenger/{Passenger_id}`
+Delete a Passenger record
+
+**Parameters:**
+- `Passenger_id` (path): Record ID
+
+```javascript
+await base44.entities.Passenger.delete(recordId);
+```
+
+### `PUT /entities/Passenger/{Passenger_id}/restore`
+Restore a deleted Passenger record
+
+**Parameters:**
+- `Passenger_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Passenger.restore(recordId);
+```
+
+## Aereo
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `passenger_name` | string | Yes | Nombre del pasajero |
+| `destination` | string | Yes | Destino |
+| `tarifa_base` | number |  | Tarifa base |
+| `tua` | number |  | TUA |
+| `otros_impuestos` | number |  | Otros impuestos |
+| `iva_16` | number |  | IVA 16% |
+| `tasa_0` | number |  | Tasa 0% |
+| `mkup_agencia` | number |  | Markup agencia |
+| `mkup_externo` | number |  | Markup externo |
+| `total` | number |  | Total calculado |
+| `service_date` | string |  | Fecha del servicio |
+| `notes` | string |  | Notas |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Aereo`
+List Aereo records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Aereo.list();
+```
+
+### `POST /entities/Aereo`
+Create a Aereo record
+
+```javascript
+const record = await base44.entities.Aereo.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Aereo`
+Delete multiple Aereo records
+
+```javascript
+await base44.entities.Aereo.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  passenger_name: "Example passenger_name"
+});
+```
+
+### `POST /entities/Aereo/bulk`
+Bulk create Aereo records
+
+```javascript
+const records = await base44.entities.Aereo.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Aereo/bulk`
+Bulk update Aereo records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Aereo/update-many`
+Update many Aereo records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Aereo/{Aereo_id}`
+Get a Aereo record by ID
+
+**Parameters:**
+- `Aereo_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Aereo.get(recordId);
+```
+
+### `PUT /entities/Aereo/{Aereo_id}`
+Update a Aereo record
+
+**Parameters:**
+- `Aereo_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Aereo.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Aereo/{Aereo_id}`
+Delete a Aereo record
+
+**Parameters:**
+- `Aereo_id` (path): Record ID
+
+```javascript
+await base44.entities.Aereo.delete(recordId);
+```
+
+### `PUT /entities/Aereo/{Aereo_id}/restore`
+Restore a deleted Aereo record
+
+**Parameters:**
+- `Aereo_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Aereo.restore(recordId);
+```
+
+## Hotel
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `passenger_name` | string | Yes | Nombre del pasajero |
+| `destination` | string | Yes | Destino / Hotel |
+| `tarifa_base` | number |  | Tarifa base |
+| `ish` | number |  | ISH |
+| `otros_impuestos` | number |  | Otros impuestos |
+| `iva_16` | number |  | IVA 16% |
+| `tasa_0` | number |  | Tasa 0% |
+| `mkup_agencia` | number |  | Markup agencia |
+| `mkup_externo` | number |  | Markup externo |
+| `total` | number |  | Total calculado |
+| `service_date` | string |  | Fecha del servicio |
+| `notes` | string |  | Notas |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Hotel`
+List Hotel records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Hotel.list();
+```
+
+### `POST /entities/Hotel`
+Create a Hotel record
+
+```javascript
+const record = await base44.entities.Hotel.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Hotel`
+Delete multiple Hotel records
+
+```javascript
+await base44.entities.Hotel.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  passenger_name: "Example passenger_name"
+});
+```
+
+### `POST /entities/Hotel/bulk`
+Bulk create Hotel records
+
+```javascript
+const records = await base44.entities.Hotel.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Hotel/bulk`
+Bulk update Hotel records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Hotel/update-many`
+Update many Hotel records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Hotel/{Hotel_id}`
+Get a Hotel record by ID
+
+**Parameters:**
+- `Hotel_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Hotel.get(recordId);
+```
+
+### `PUT /entities/Hotel/{Hotel_id}`
+Update a Hotel record
+
+**Parameters:**
+- `Hotel_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Hotel.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Hotel/{Hotel_id}`
+Delete a Hotel record
+
+**Parameters:**
+- `Hotel_id` (path): Record ID
+
+```javascript
+await base44.entities.Hotel.delete(recordId);
+```
+
+### `PUT /entities/Hotel/{Hotel_id}/restore`
+Restore a deleted Hotel record
+
+**Parameters:**
+- `Hotel_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Hotel.restore(recordId);
+```
+
+## Terrestre
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `tipo_servicio` | `tren`, `auto`, `bus`, `renta_auto`, `avion_privado`, `crucero` | Yes | Tipo de servicio terrestre |
+| `passenger_name` | string | Yes | Nombre del pasajero |
+| `nombre_cabina` | string |  | Nombre de cabina (solo crucero) |
+| `destination` | string | Yes | Destino |
+| `tarifa_base` | number |  | Tarifa base |
+| `ish` | number |  | ISH |
+| `otros_impuestos` | number |  | Otros impuestos |
+| `iva_16` | number |  | IVA 16% |
+| `tasa_0` | number |  | Tasa 0% |
+| `mkup_agencia` | number |  | Markup agencia |
+| `mkup_externo` | number |  | Markup externo |
+| `total` | number |  | Total calculado |
+| `service_date` | string |  | Fecha del servicio |
+| `notes` | string |  | Notas |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/Terrestre`
+List Terrestre records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.Terrestre.list();
+```
+
+### `POST /entities/Terrestre`
+Create a Terrestre record
+
+```javascript
+const record = await base44.entities.Terrestre.create({
+  // your data
+});
+```
+
+### `DELETE /entities/Terrestre`
+Delete multiple Terrestre records
+
+```javascript
+await base44.entities.Terrestre.deleteMany({
+  // query filter — WARNING: empty {} deletes ALL records
+  tipo_servicio: "tren"
+});
+```
+
+### `POST /entities/Terrestre/bulk`
+Bulk create Terrestre records
+
+```javascript
+const records = await base44.entities.Terrestre.bulkCreate([
+  { /* record 1 */ },
+  { /* record 2 */ },
+]);
+```
+
+### `PUT /entities/Terrestre/bulk`
+Bulk update Terrestre records
+
+```javascript
+// bulk-update is not available via SDK — use the REST API
+```
+
+### `PATCH /entities/Terrestre/update-many`
+Update many Terrestre records by query
+
+```javascript
+// update-many is not available via SDK — use the REST API
+```
+
+### `GET /entities/Terrestre/{Terrestre_id}`
+Get a Terrestre record by ID
+
+**Parameters:**
+- `Terrestre_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Terrestre.get(recordId);
+```
+
+### `PUT /entities/Terrestre/{Terrestre_id}`
+Update a Terrestre record
+
+**Parameters:**
+- `Terrestre_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Terrestre.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/Terrestre/{Terrestre_id}`
+Delete a Terrestre record
+
+**Parameters:**
+- `Terrestre_id` (path): Record ID
+
+```javascript
+await base44.entities.Terrestre.delete(recordId);
+```
+
+### `PUT /entities/Terrestre/{Terrestre_id}/restore`
+Restore a deleted Terrestre record
+
+**Parameters:**
+- `Terrestre_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.Terrestre.restore(recordId);
+```
+
+## User
+
+### Schema
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `email` | string | Yes | The email of the user |
+| `full_name` | string | Yes | The full name of the user |
+| `role` | `admin`, `user` | Yes | The role of the user in the app |
+| `id` | string |  | Unique record identifier |
+| `created_date` | string |  | Record creation timestamp |
+| `updated_date` | string |  | Record last update timestamp |
+| `created_by` | string |  | Email of the user who created the record |
+
+### Endpoints
+
+### `GET /entities/User`
+List User records
+
+**Parameters:**
+- `q` (query): JSON query filter, e.g. {"status":"active"}
+- `limit` (query): Maximum number of records to return
+- `skip` (query): Number of records to skip (pagination)
+- `sort_by` (query): Field name to sort by. Prefix with '-' for descending order, e.g. -created_date
+
+```javascript
+const records = await base44.entities.User.list();
+```
+
+### `POST /entities/User`
+Create a User record
+
+```javascript
+const record = await base44.entities.User.create({
+  // your data
+});
+```
+
+### `GET /entities/User/{User_id}`
+Get a User record by ID
+
+**Parameters:**
+- `User_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.User.get(recordId);
+```
+
+### `PUT /entities/User/{User_id}`
+Update a User record
+
+**Parameters:**
+- `User_id` (path): Record ID
+
+```javascript
+const record = await base44.entities.User.update(recordId, {
+  // fields to update
+});
+```
+
+### `DELETE /entities/User/{User_id}`
+Delete a User record
+
+**Parameters:**
+- `User_id` (path): Record ID
+
+```javascript
+await base44.entities.User.delete(recordId);
+```
